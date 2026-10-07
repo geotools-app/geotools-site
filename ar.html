@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GeoTools مجموعة أدوات لنظام ماك تدقّق في كيفية قراءة ChatGPT وGemini وPerplexity وGoogle AI Overviews للصفحة أو الكيان أو العلامة التجارية.">
+<link rel="canonical" href="https://geotools-app.github.io/geotools-site/ar.html">
+<link rel="alternate" hreflang="en" href="https://geotools-app.github.io/geotools-site/">
+<link rel="alternate" hreflang="fr" href="https://geotools-app.github.io/geotools-site/fr.html">
+<link rel="alternate" hreflang="ar" href="https://geotools-app.github.io/geotools-site/ar.html">
+<link rel="alternate" hreflang="x-default" href="https://geotools-app.github.io/geotools-site/">
+<title>GeoTools | أدوات تدقيق GEO للبحث بالذكاء الاصطناعي</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: left-aligned editorial column, hero with an illustrative audit report beside the thesis; tools as a ruled table, not cards */
+:root{
+  --bg:#F2F5F7; --surface:#FFFFFF; --fg:#0E1B2C; --muted:#4D5E71; --line:#D3DBE3;
+  --accent:#0B7F73; --accent-ink:#FFFFFF; --warn:#B7650A; --ok:#0B7F73; --bad:#B3341F;
+  --f-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A1320;--surface:#111E2F;--fg:#E8EEF4;--muted:#9AABBD;--line:#23344A;--accent:#3CCBB8;--accent-ink:#06201C;--warn:#E3A24D;--ok:#3CCBB8;--bad:#F08A76;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A1320;--surface:#111E2F;--fg:#E8EEF4;--muted:#9AABBD;--line:#23344A;--accent:#3CCBB8;--accent-ink:#06201C;--warn:#E3A24D;--ok:#3CCBB8;--bad:#F08A76;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.08;letter-spacing:-.02em}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:22px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.03em;text-decoration:none}
+.brand i{font-style:normal;color:var(--accent)}
+nav .links{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+nav .links a{text-decoration:none;color:var(--muted)}
+nav .links a:hover{color:var(--fg)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:56px 72px}
+.hero h1{font-size:clamp(38px,6vw,68px);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:19px;color:var(--muted);max-width:52ch;margin:22px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 20px;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--fg)}
+.btn.p{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{transform:translateY(-1px)}
+.report{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0;box-shadow:0 18px 40px -26px rgba(14,27,44,.45)}
+.report .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.row{display:grid;grid-template-columns:1fr 54px;gap:6px 12px;padding-block:11px;border-top:1px solid var(--line);align-items:center}
+.row b{font-weight:600;font-size:14px}
+.row span.s{font-family:var(--f-mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.bar{grid-column:1/-1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.bar i.w{background:var(--warn)} .bar i.b{background:var(--bad)}
+.report small{display:block;margin-top:12px;color:var(--muted);font-size:12px}
+section{padding-block:64px;border-top:1px solid var(--line)}
+section h2{font-size:clamp(28px,4vw,42px);margin:10px 0 16px;max-width:20ch}
+section p.sub{color:var(--muted);max-width:62ch;margin:0 0 32px;font-size:17px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.two>div{min-width:0}
+.two h3{font-size:20px;margin-bottom:8px;letter-spacing:-.01em}
+.two p{margin:0;color:var(--muted)}
+.tools{border-top:2px solid var(--fg)}
+.tool{display:grid;grid-template-columns:200px 1fr 190px;gap:8px 28px;padding-block:20px;border-bottom:1px solid var(--line);align-items:baseline}
+.tool h3{font-size:19px;letter-spacing:-.01em}
+.tool p{margin:0;color:var(--muted);min-width:0}
+.tool .tag{font-family:var(--f-mono);font-size:12px;color:var(--accent);letter-spacing:.04em}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.flow div{padding:20px 18px;border-inline-end:1px solid var(--line);min-width:0}
+.flow div:last-child{border-inline-end:0}
+.flow .eyebrow{color:var(--accent)}
+.flow h3{font-size:17px;margin:8px 0 6px;letter-spacing:-.01em}
+.flow p{margin:0;font-size:14px;color:var(--muted)}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:8px}
+.proof .n{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,5vw,52px);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--accent)}
+.proof p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.stack span{font-family:var(--f-mono);font-size:13px;border:1px solid var(--line);background:var(--surface);padding:6px 11px;border-radius:5px}
+.radar{background:var(--fg);color:var(--bg);border-radius:12px;padding:36px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+.radar>div{min-width:0}
+.radar h2{margin-top:10px;color:var(--bg)}
+.radar p{color:inherit;opacity:.8;margin:0 0 12px}
+.radar .eyebrow{color:inherit;opacity:.7}
+.radar ul{margin:0;padding-inline-start:18px;opacity:.9}
+.radar li{margin-bottom:8px}
+footer{border-top:1px solid var(--line);padding-block:36px 56px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+footer b{color:var(--fg)}
+@media (max-width:860px){
+  .hero,.two,.radar{grid-template-columns:1fr}
+  .tool{grid-template-columns:1fr;gap:4px}
+  .flow{grid-template-columns:1fr}
+  .flow div{border-inline-end:0;border-bottom:1px solid var(--line)}
+  .flow div:last-child{border-bottom:0}
+  .proof{grid-template-columns:1fr}
+  .hero{padding-block:32px 48px}
+  .radar{padding:24px}
+}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+html{-webkit-text-size-adjust:100%}body{margin:0}
+
+.lang{font-family:var(--f-mono);font-size:12px;border:1px solid var(--line);padding:3px 10px;border-radius:999px;text-decoration:none;white-space:nowrap}
+nav .links a.lang[aria-current="page"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+nav .links{align-items:center}
+html[dir="rtl"] *{letter-spacing:0!important;text-transform:none!important}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3{line-height:1.3}
+html[dir="rtl"] .hero h1{line-height:1.25}
+html[dir="rtl"] .hero h1 i{font-style:normal}
+html[dir="rtl"] .brand{direction:ltr}
+html[dir="rtl"]{--f-display:'IBM Plex Sans Arabic',system-ui,sans-serif;--f-body:'IBM Plex Sans Arabic',system-ui,sans-serif;--f-mono:'IBM Plex Sans Arabic',system-ui,sans-serif;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#top">Geo<i>الأدوات</i></a>
+    <div class="links"><a href="#tools">الأدوات</a><a href="#how">طريقة العمل</a><a href="#proof">الأدلة</a><a href="#radar">Radar</a><a class="lang" href="index.html" hreflang="en" lang="en">English</a><a class="lang" href="fr.html" hreflang="fr" lang="fr">Français</a><a class="lang" href="ar.html" hreflang="ar" lang="ar" aria-current="page">العربية</a></div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow">مجموعة أدوات تحسين الظهور في محركات الذكاء الاصطناعي التوليدي (GEO)</div>
+      <h1 style="margin-top:14px">شاهد صفحاتك كما <em>يقرؤها نموذج لغوي</em>.</h1>
+      <p class="lede">يدقّق GeoTools في كيفية إدراك ChatGPT وGemini وPerplexity وGoogle AI Overviews وAI Mode للصفحة أو الكيان أو العلامة التجارية، ويخبرك بما يجب تغييره لتحصل على الاستشهاد.</p>
+      <div class="cta">
+        <a class="btn p" href="#tools">اطّلع على الأدوات</a>
+        <a class="btn" href="https://aioseo.fr" target="_blank" rel="noopener">اقرأ الأبحاث على aioseo.fr</a>
+      </div>
+    </div>
+    <aside class="report" aria-label="Illustrative audit report">
+      <div class="top"><span class="eyebrow">تدقيق صفحة</span><span class="eyebrow">مثال توضيحي</span></div>
+      <div class="row"><b>الإجابة ضمن أول 100 كلمة</b><span class="s">82</span><div class="bar"><i style="width:82%"></i></div></div>
+      <div class="row"><b>وضوح الكيان</b><span class="s">64</span><div class="bar"><i class="w" style="width:64%"></i></div></div>
+      <div class="row"><b>تغطية البيانات المهيكلة</b><span class="s">41</span><div class="bar"><i class="b" style="width:41%"></i></div></div>
+      <div class="row"><b>إشارات الحداثة</b><span class="s">73</span><div class="bar"><i style="width:73%"></i></div></div>
+      <div class="row"><b>اتساق الصورة والنص</b><span class="s">58</span><div class="bar"><i class="w" style="width:58%"></i></div></div>
+      <small>نموذج لتصميم تقرير GeoTools. الدرجات المعروضة قيم توضيحية وليست بيانات عملاء.</small>
+    </aside>
+  </header>
+
+  <section id="problem">
+    <div class="eyebrow">المشكلة</div>
+    <h2>لم يعد البحث يعرض روابط فقط، بل يجيب. والعلامات لا تعرف إن كانت ضمن الإجابة.</h2>
+    <p class="sub">تتوفر ميزتا AI Overviews وAI Mode في فرنسا منذ يوليو 2026، وتلخّص المساعدات الذكية المصادر وتستشهد بها بالفعل في ملايين الاستعلامات. أما أدوات المتابعة فمصمَّمة للشركات الكبرى وتدور حول لوحات المؤشرات لا حول تصحيح الصفحات.</p>
+    <div class="two">
+      <div><h3>ما لا تراه الفرق اليوم</h3><p>هل الصفحة مقروءة لنموذج لغوي، وهل العلامة معروفة ككيان، وأي مقاطع تُقتبس في الإجابة، وأي منافس يُذكر بدلًا منك.</p></div>
+      <div><h3>ما يقدّمه GeoTools</h3><p>يحوّل كل سؤال إلى تدقيق قابل للتكرار بنتيجة واضحة: الملاحظة والدليل والتعديل المطلوب على الصفحة. صُمّم على يد ممارس ينفّذ هذه التدقيقات لعملائه كل أسبوع.</p></div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="eyebrow">مجموعة الأدوات</div>
+    <h2>تطبيق ماك واحد. كل تدقيق بمهمة واحدة.</h2>
+    <p class="sub">يجمع GeoTools أدوات التدقيق في تطبيق أصلي واحد. تُدخَل مفاتيح API مرة واحدة. بلا سطر أوامر ولا تبويبات متصفح.</p>
+    <div class="tools">
+      <article class="tool"><div><h3>تدقيق GEO متعدد الوسائط</h3><div class="tag">الأداة الرئيسية</div></div><p>يحلّل الصفحة كما يدركها نموذج متعدد الوسائط: النص والصور وبنية HTML معًا، باستخدام Gemini. ويكشف ما قد يفوت النموذج أو يسيء فهمه.</p><div class="tag">Gemini متعدد الوسائط</div></article>
+      <article class="tool"><div><h3>بحث بالتضمينات متعددة الوسائط</h3><div class="tag">الأداة الرئيسية</div></div><p>يضع النص والصور في فضاء واحد للتحقق من أن الصفحة تطابق قصد الاستعلام، بما في ذلك المحتوى الموجود في الصور فقط.</p><div class="tag">تضمينات Gemini</div></article>
+      <article class="tool"><div><h3>فاحص الظهور في النماذج اللغوية</h3></div><p>يتحقق من ظهور علامة أو صفحة في إجابات النماذج اللغوية عن مجموعة من الأسئلة، وكيف تُذكر.</p><div class="tag">حضور العلامة</div></article>
+      <article class="tool"><div><h3>محلّل القرب الدلالي</h3></div><p>يقيس المسافة بين صفحة واستعلام مستهدف بالتضمينات، ليسترشد التحرير بالقياس.</p><div class="tag">التضمينات</div></article>
+      <article class="tool"><div><h3>فاحص الكيانات</h3></div><p>يتأكد من أن العلامة أو الكاتب أو المنتج موصوف بما يكفي من الاتساق ليُعرَف ككيان واحد.</p><div class="tag">SEO الكيانات</div></article>
+      <article class="tool"><div><h3>زاحف الحداثة</h3></div><p>يستخرج إشارات التواريخ والتحديث في الموقع لاكتشاف الصفحات القديمة التي تفقد الاستشهادات.</p><div class="tag">الزحف</div></article>
+      <article class="tool"><div><h3>التنبؤ ومراقبة السجلات</h3></div><p>تنبؤات الزيارات باستخدام TimesFM وProphet، ومراقب لسجلات الزحف لمعرفة ما تجلبه الروبوتات فعلًا.</p><div class="tag">التنبؤ والسجلات</div></article>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="eyebrow">مراحل التدقيق</div>
+    <h2>من الرابط إلى قائمة تصحيحات مرتّبة بالأولوية.</h2>
+    <p class="sub">يتّبع كل تدقيق السلسلة نفسها، لتكون النتائج قابلة للمقارنة من شهر إلى آخر.</p>
+    <div class="flow">
+      <div><div class="eyebrow">الخطوة 1</div><h3>الجلب</h3><p>جلب الصفحة بعد التصيير وبصيغتها الخام.</p></div>
+      <div><div class="eyebrow">الخطوة 2</div><h3>الإدراك</h3><p>إرسال النص والصور والبنية إلى نموذج متعدد الوسائط.</p></div>
+      <div><div class="eyebrow">الخطوة 3</div><h3>القياس</h3><p>تقييم القرب الدلالي والكيانات والحداثة والبنية.</p></div>
+      <div><div class="eyebrow">الخطوة 4</div><h3>المقارنة</h3><p>مقابلة النتيجة بالاستعلام المستهدف وبالمنافسين.</p></div>
+      <div><div class="eyebrow">الخطوة 5</div><h3>التوصية</h3><p>إصدار تعديلات لكل صفحة مرتّبة حسب الأثر.</p></div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="eyebrow">الأدلة</div>
+    <h2>قائم على بيانات مباشرة ومنشور للعلن.</h2>
+    <p class="sub">تُختبر طرق GeoTools على aioseo.fr، وهو منشور مستقل عن GEO، وتُوثَّق انطلاقًا من بيانات Search Console الخاصة به (فترة 3 أشهر، يوليو 2026).</p>
+    <div class="proof">
+      <div><div class="n">4.82 ألف</div><p>ظهور مولَّد بالذكاء الاصطناعي على 40 رابطًا</p></div>
+      <div><div class="n">66.2 ألف</div><p>ظهور تقليدي على 126 رابطًا للمقارنة</p></div>
+      <div><div class="n">81</div><p>مصطلحًا في مجال GEO والنماذج اللغوية معرَّفًا في المعجم العام</p></div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="eyebrow">التقنيات</div>
+    <h2>Python وGemini وبياناتك الخاصة.</h2>
+    <div class="stack"><span>Python</span><span>Streamlit</span><span>Gemini</span><span>التضمينات</span><span>TimesFM</span><span>Prophet</span><span>Search Console</span><span>GA4</span><span>BigQuery</span><span>MCP</span></div>
+  </section>
+
+  <section id="radar" style="border-top:0;padding-top:24px">
+    <div class="radar">
+      <div>
+        <div class="eyebrow">الإصدار القادم</div>
+        <h2>Radar</h2>
+        <p>متابعة لظهور العلامة في النماذج اللغوية. تُطرح مجموعة ثابتة من الأسئلة على عدة مساعدات بشكل دوري، ويرصد Radar الاستشهاد والتوصية والانطباع عبر الزمن.</p>
+        <p>توجد بالفعل نسخة تجريبية تعمل، وهي أساس نسخة الإنتاج.</p>
+      </div>
+      <div>
+        <div class="eyebrow">لماذا يهمّ</div>
+        <ul>
+          <li>بسعر مناسب للشركات الناشئة والصغيرة، لا للشركات الكبرى فقط.</li>
+          <li>يربط بيانات الظهور بتدقيقات الصفحات في GeoTools.</li>
+          <li>التشغيل الدوري للأسئلة هو أكبر بند لاستهلاك الرموز (tokens).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><b>GeoTools</b> من إعداد Aslane Samai<br>مستشار GEO وSEO، ماستر 2 IREN، جامعة باريس دوفين PSL</div>
+    <div>الأبحاث والمنهجية: <a href="https://aioseo.fr" target="_blank" rel="noopener">aioseo.fr</a></div>
+  </footer>
+</div>
+</body>
+</html>
