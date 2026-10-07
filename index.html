@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GeoTools is a Mac toolkit that audits how ChatGPT, Gemini, Perplexity and Google AI Overviews read a page, an entity or a brand.">
+<title>GeoTools</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: left-aligned editorial column, hero with an illustrative audit report beside the thesis; tools as a ruled table, not cards */
+:root{
+  --bg:#F2F5F7; --surface:#FFFFFF; --fg:#0E1B2C; --muted:#4D5E71; --line:#D3DBE3;
+  --accent:#0B7F73; --accent-ink:#FFFFFF; --warn:#B7650A; --ok:#0B7F73; --bad:#B3341F;
+  --f-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A1320;--surface:#111E2F;--fg:#E8EEF4;--muted:#9AABBD;--line:#23344A;--accent:#3CCBB8;--accent-ink:#06201C;--warn:#E3A24D;--ok:#3CCBB8;--bad:#F08A76;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A1320;--surface:#111E2F;--fg:#E8EEF4;--muted:#9AABBD;--line:#23344A;--accent:#3CCBB8;--accent-ink:#06201C;--warn:#E3A24D;--ok:#3CCBB8;--bad:#F08A76;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.08;letter-spacing:-.02em}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:22px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.03em;text-decoration:none}
+.brand i{font-style:normal;color:var(--accent)}
+nav .links{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+nav .links a{text-decoration:none;color:var(--muted)}
+nav .links a:hover{color:var(--fg)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:56px 72px}
+.hero h1{font-size:clamp(38px,6vw,68px);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:19px;color:var(--muted);max-width:52ch;margin:22px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 20px;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--fg)}
+.btn.p{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{transform:translateY(-1px)}
+.report{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0;box-shadow:0 18px 40px -26px rgba(14,27,44,.45)}
+.report .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.row{display:grid;grid-template-columns:1fr 54px;gap:6px 12px;padding-block:11px;border-top:1px solid var(--line);align-items:center}
+.row b{font-weight:600;font-size:14px}
+.row span.s{font-family:var(--f-mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.bar{grid-column:1/-1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.bar i.w{background:var(--warn)} .bar i.b{background:var(--bad)}
+.report small{display:block;margin-top:12px;color:var(--muted);font-size:12px}
+section{padding-block:64px;border-top:1px solid var(--line)}
+section h2{font-size:clamp(28px,4vw,42px);margin:10px 0 16px;max-width:20ch}
+section p.sub{color:var(--muted);max-width:62ch;margin:0 0 32px;font-size:17px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.two>div{min-width:0}
+.two h3{font-size:20px;margin-bottom:8px;letter-spacing:-.01em}
+.two p{margin:0;color:var(--muted)}
+.tools{border-top:2px solid var(--fg)}
+.tool{display:grid;grid-template-columns:200px 1fr 190px;gap:8px 28px;padding-block:20px;border-bottom:1px solid var(--line);align-items:baseline}
+.tool h3{font-size:19px;letter-spacing:-.01em}
+.tool p{margin:0;color:var(--muted);min-width:0}
+.tool .tag{font-family:var(--f-mono);font-size:12px;color:var(--accent);letter-spacing:.04em}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.flow div{padding:20px 18px;border-right:1px solid var(--line);min-width:0}
+.flow div:last-child{border-right:0}
+.flow .eyebrow{color:var(--accent)}
+.flow h3{font-size:17px;margin:8px 0 6px;letter-spacing:-.01em}
+.flow p{margin:0;font-size:14px;color:var(--muted)}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:8px}
+.proof .n{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,5vw,52px);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--accent)}
+.proof p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.stack span{font-family:var(--f-mono);font-size:13px;border:1px solid var(--line);background:var(--surface);padding:6px 11px;border-radius:5px}
+.radar{background:var(--fg);color:var(--bg);border-radius:12px;padding:36px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+.radar>div{min-width:0}
+.radar h2{margin-top:10px;color:var(--bg)}
+.radar p{color:inherit;opacity:.8;margin:0 0 12px}
+.radar .eyebrow{color:inherit;opacity:.7}
+.radar ul{margin:0;padding-left:18px;opacity:.9}
+.radar li{margin-bottom:8px}
+footer{border-top:1px solid var(--line);padding-block:36px 56px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+footer b{color:var(--fg)}
+@media (max-width:860px){
+  .hero,.two,.radar{grid-template-columns:1fr}
+  .tool{grid-template-columns:1fr;gap:4px}
+  .flow{grid-template-columns:1fr}
+  .flow div{border-right:0;border-bottom:1px solid var(--line)}
+  .flow div:last-child{border-bottom:0}
+  .proof{grid-template-columns:1fr}
+  .hero{padding-block:32px 48px}
+  .radar{padding:24px}
+}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#top">Geo<i>Tools</i></a>
+    <div class="links"><a href="#tools">Tools</a><a href="#how">How it works</a><a href="#proof">Evidence</a><a href="#radar">Radar</a></div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow">Generative Engine Optimization toolkit</div>
+      <h1 style="margin-top:14px">See your pages the way <em>an LLM</em> reads them.</h1>
+      <p class="lede">GeoTools audits how ChatGPT, Gemini, Perplexity, Google AI Overviews and AI Mode perceive a page, an entity or a brand, and tells you what to change so you get cited.</p>
+      <div class="cta">
+        <a class="btn p" href="#tools">See the tools</a>
+        <a class="btn" href="https://aioseo.fr" target="_blank" rel="noopener">Read the research at aioseo.fr</a>
+      </div>
+    </div>
+    <aside class="report" aria-label="Illustrative audit report">
+      <div class="top"><span class="eyebrow">Page audit</span><span class="eyebrow">Illustrative example</span></div>
+      <div class="row"><b>Answer in first 100 words</b><span class="s">82</span><div class="bar"><i style="width:82%"></i></div></div>
+      <div class="row"><b>Entity clarity</b><span class="s">64</span><div class="bar"><i class="w" style="width:64%"></i></div></div>
+      <div class="row"><b>Structured data coverage</b><span class="s">41</span><div class="bar"><i class="b" style="width:41%"></i></div></div>
+      <div class="row"><b>Freshness signals</b><span class="s">73</span><div class="bar"><i style="width:73%"></i></div></div>
+      <div class="row"><b>Image and text consistency</b><span class="s">58</span><div class="bar"><i class="w" style="width:58%"></i></div></div>
+      <small>Sample layout of a GeoTools report. Scores shown are example values, not client data.</small>
+    </aside>
+  </header>
+
+  <section id="problem">
+    <div class="eyebrow">The problem</div>
+    <h2>Search now answers. Brands don't know if they are in the answer.</h2>
+    <p class="sub">AI Overviews and AI Mode are live in France since July 2026, and assistants already synthesize and cite sources for millions of queries. The tools that track this are priced for enterprises and built around dashboards, not around fixing pages.</p>
+    <div class="two">
+      <div><h3>What teams cannot see today</h3><p>Whether a page is readable by a language model, whether the brand is recognized as an entity, which passages get lifted into an answer, and which competitor is cited instead.</p></div>
+      <div><h3>What GeoTools does about it</h3><p>It turns each question into a repeatable audit with a clear output: the finding, the evidence, and the page-level change that follows. Built by a practitioner who runs these audits for clients every week.</p></div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="eyebrow">The toolkit</div>
+    <h2>One Mac app. Each audit a single job.</h2>
+    <p class="sub">GeoTools packages the audit tools in one native application. API keys are entered once. No terminal, no browser tabs.</p>
+    <div class="tools">
+      <article class="tool"><div><h3>Multimodal GEO audit</h3><div class="tag">Flagship</div></div><p>Analyzes a page the way a multimodal model perceives it: text, images and HTML structure together, using Gemini. Flags what an LLM would miss or misread.</p><div class="tag">Gemini multimodal</div></article>
+      <article class="tool"><div><h3>Multimodal embedding search</h3><div class="tag">Flagship</div></div><p>Embeds text and images in one space to test whether a page matches the intent behind a query, including content that only exists in visuals.</p><div class="tag">Gemini embeddings</div></article>
+      <article class="tool"><div><h3>LLM visibility checker</h3></div><p>Checks whether a brand or page appears in LLM answers for a set of prompts, and how it is mentioned.</p><div class="tag">Brand presence</div></article>
+      <article class="tool"><div><h3>Semantic proximity analyzer</h3></div><p>Measures the distance between a page and a target query with embeddings, so rewrites are guided by measurement.</p><div class="tag">Embeddings</div></article>
+      <article class="tool"><div><h3>Entity checker</h3></div><p>Verifies that a brand, author or product is described consistently enough to be recognized as one entity.</p><div class="tag">Entity SEO</div></article>
+      <article class="tool"><div><h3>Freshness crawler</h3></div><p>Extracts date and update signals across a site to find stale pages that lose citations.</p><div class="tag">Crawl</div></article>
+      <article class="tool"><div><h3>Forecasting and log monitoring</h3></div><p>Traffic forecasts with TimesFM and Prophet, plus a crawler log monitor to see what bots actually fetch.</p><div class="tag">Forecast, logs</div></article>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="eyebrow">Audit workflow</div>
+    <h2>From URL to a prioritized fix list.</h2>
+    <p class="sub">Every audit follows the same chain, so results can be compared from one month to the next.</p>
+    <div class="flow">
+      <div><div class="eyebrow">Step 1</div><h3>Fetch</h3><p>Retrieve the page, rendered and raw.</p></div>
+      <div><div class="eyebrow">Step 2</div><h3>Perceive</h3><p>Send text, images and structure to a multimodal model.</p></div>
+      <div><div class="eyebrow">Step 3</div><h3>Measure</h3><p>Score proximity, entities, freshness and structure.</p></div>
+      <div><div class="eyebrow">Step 4</div><h3>Compare</h3><p>Set the result against the target query and competitors.</p></div>
+      <div><div class="eyebrow">Step 5</div><h3>Prescribe</h3><p>Output page-level changes ranked by impact.</p></div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="eyebrow">Evidence</div>
+    <h2>Built on first-party data, published in the open.</h2>
+    <p class="sub">The methods behind GeoTools are tested on aioseo.fr, an independent GEO publication, and documented from its own Search Console data (3 month window, July 2026).</p>
+    <div class="proof">
+      <div><div class="n">4.82K</div><p>AI generated impressions across 40 URLs</p></div>
+      <div><div class="n">66.2K</div><p>classic impressions across 126 URLs, for comparison</p></div>
+      <div><div class="n">81</div><p>GEO and LLM terms defined in the public glossary</p></div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="eyebrow">Stack</div>
+    <h2>Python, Gemini, and your own data.</h2>
+    <div class="stack"><span>Python</span><span>Streamlit</span><span>Gemini</span><span>Embeddings</span><span>TimesFM</span><span>Prophet</span><span>Search Console</span><span>GA4</span><span>BigQuery</span><span>MCP</span></div>
+  </section>
+
+  <section id="radar" style="border-top:0;padding-top:24px">
+    <div class="radar">
+      <div>
+        <div class="eyebrow">Next release</div>
+        <h2>Radar</h2>
+        <p>A brand visibility tracker for LLMs. A fixed panel of prompts is queried across assistants on a schedule, and Radar reports citation, recommendation and sentiment over time.</p>
+        <p>A working test version already exists and is the base for the production build.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Why it matters</div>
+        <ul>
+          <li>Priced for startups and SMEs, not only enterprises.</li>
+          <li>Connects visibility data to the page-level audits in GeoTools.</li>
+          <li>Recurring prompt runs are the main driver of token usage.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><b>GeoTools</b> by Aslane Samai<br>GEO and SEO consultant, Master 2 IREN, Paris Dauphine PSL</div>
+    <div>Research and method: <a href="https://aioseo.fr" target="_blank" rel="noopener">aioseo.fr</a></div>
+  </footer>
+</div>
+</body>
+</html>
