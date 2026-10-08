@@ -75,24 +75,24 @@ section p.sub{color:var(--muted);max-width:62ch;margin:0 0 32px;font-size:17px}
 .proof p{margin:6px 0 0;color:var(--muted);font-size:15px}
 .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .stack span{font-family:var(--f-mono);font-size:13px;border:1px solid var(--line);background:var(--surface);padding:6px 11px;border-radius:5px}
-.radar{background:var(--fg);color:var(--bg);border-radius:12px;padding:36px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
-.radar>div{min-width:0}
-.radar h2{margin-top:10px;color:var(--bg)}
-.radar p{color:inherit;opacity:.8;margin:0 0 12px}
-.radar .eyebrow{color:inherit;opacity:.7}
-.radar ul{margin:0;padding-inline-start:18px;opacity:.9}
-.radar li{margin-bottom:8px}
+.vigia{background:var(--fg);color:var(--bg);border-radius:12px;padding:36px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+.vigia>div{min-width:0}
+.vigia h2{margin-top:10px;color:var(--bg)}
+.vigia p{color:inherit;opacity:.8;margin:0 0 12px}
+.vigia .eyebrow{color:inherit;opacity:.7}
+.vigia ul{margin:0;padding-inline-start:18px;opacity:.9}
+.vigia li{margin-bottom:8px}
 footer{border-top:1px solid var(--line);padding-block:36px 56px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:14px}
 footer b{color:var(--fg)}
 @media (max-width:860px){
-  .hero,.two,.radar{grid-template-columns:1fr}
+  .hero,.two,.vigia{grid-template-columns:1fr}
   .tool{grid-template-columns:1fr;gap:4px}
   .flow{grid-template-columns:1fr}
   .flow div{border-inline-end:0;border-bottom:1px solid var(--line)}
   .flow div:last-child{border-bottom:0}
   .proof{grid-template-columns:1fr}
   .hero{padding-block:32px 48px}
-  .radar{padding:24px}
+  .vigia{padding:24px}
 }
 @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
 
@@ -112,7 +112,7 @@ html[dir="rtl"] .brand{direction:ltr}
 <div class="wrap">
   <nav>
     <a class="brand" href="#top">Geo<i>Tools</i></a>
-    <div class="links"><a href="#tools">Tools</a><a href="#how">How it works</a><a href="#proof">Evidence</a><a href="#radar">Radar</a><a class="lang" href="index.html" hreflang="en" lang="en" aria-current="page">English</a><a class="lang" href="fr.html" hreflang="fr" lang="fr">Français</a><a class="lang" href="ar.html" hreflang="ar" lang="ar">العربية</a></div>
+    <div class="links"><a href="#tools">Tools</a><a href="#how">How it works</a><a href="#proof">Evidence</a><a href="#vigia">Vigia</a><a class="lang" href="index.html" hreflang="en" lang="en" aria-current="page">English</a><a class="lang" href="fr.html" hreflang="fr" lang="fr">Français</a><a class="lang" href="ar.html" hreflang="ar" lang="ar">العربية</a></div>
   </nav>
 
   <header class="hero" id="top">
@@ -191,12 +191,12 @@ html[dir="rtl"] .brand{direction:ltr}
     <div class="stack"><span>Python</span><span>Streamlit</span><span>Gemini</span><span>Embeddings</span><span>TimesFM</span><span>Prophet</span><span>Search Console</span><span>GA4</span><span>BigQuery</span><span>MCP</span></div>
   </section>
 
-  <section id="radar" style="border-top:0;padding-top:24px">
-    <div class="radar">
+  <section id="vigia" style="border-top:0;padding-top:24px">
+    <div class="vigia">
       <div>
         <div class="eyebrow">Next release</div>
-        <h2>Radar</h2>
-        <p>A brand visibility tracker for LLMs. A fixed panel of prompts is queried across assistants on a schedule, and Radar reports citation, recommendation and sentiment over time.</p>
+        <h2>Vigia</h2>
+        <p>A brand visibility tracker for LLMs. A fixed panel of prompts is queried across assistants on a schedule, and Vigia reports citation, recommendation and sentiment over time.</p>
         <p>A working test version already exists and is the base for the production build.</p>
       </div>
       <div>
